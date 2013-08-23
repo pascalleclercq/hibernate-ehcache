@@ -25,19 +25,21 @@ public class SimpleTest {
 
 	@Test
 	public void retrieveMenyTimeAPerson() throws Exception {
-		Person newInstance = new Person();
-		newInstance.setFirstName("first");
-		newInstance.setFirstName("last");
-		newInstance.setEmail("email");
-
-		Integer id = personDAO.save(newInstance);
-
-		System.err.println("new Id " + id);
-		Assert.assertNotNull(id);
-
-		for (int i = 0; i < 100; i++) {
-			Person person = personDAO.findByPrimaryKey(id);
-			Assert.assertNotNull(person);
+		int j = 0;
+		while (j < 100) {
+			Person newInstance = new Person();
+			newInstance.setFirstName("first");
+			newInstance.setFirstName("last");
+			newInstance.setEmail("email");
+			Integer id = personDAO.save(newInstance);
+			//System.err.println("new Id " + id);
+			Assert.assertNotNull(id);
+			for (int i = 0; i < 100; i++) {
+				Person person = personDAO.findByPrimaryKey(id);
+				Assert.assertNotNull(person);
+			}
+			j++;
 		}
+
 	}
 }

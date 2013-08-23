@@ -12,7 +12,7 @@ import com.developer.article.model.Person;
  * Person DAO
  * @author Jacek Furmankiewicz
  */
-@Repository
+@Repository("personDao")
 @Transactional
 public class PersonDao extends GenericDaoImpl<Person,Integer>{
 
