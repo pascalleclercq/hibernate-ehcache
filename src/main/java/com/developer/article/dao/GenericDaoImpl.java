@@ -11,7 +11,9 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public abstract class GenericDaoImpl<E, PK extends Serializable> implements
 		IGenericDao<E, PK> {
 
@@ -27,7 +29,6 @@ public abstract class GenericDaoImpl<E, PK extends Serializable> implements
 		this.sf = sf;
 	}
 
-	
 	public PK save(E newInstance) {
 		return (PK) sf.getCurrentSession().save(newInstance);
 	}
@@ -46,12 +47,10 @@ public abstract class GenericDaoImpl<E, PK extends Serializable> implements
 
 	}
 
-	
 	public void update(E transientObject) {
 		sf.getCurrentSession().update(transientObject);
 	}
 
-	
 	public void delete(E persistentObject) {
 		if (persistentObject != null) {
 			sf.getCurrentSession().delete(persistentObject);
@@ -61,13 +60,11 @@ public abstract class GenericDaoImpl<E, PK extends Serializable> implements
 		}
 	}
 
-	
 	public void deleteByPrimaryKey(PK primaryKey) {
 		E entity = this.findByPrimaryKey(primaryKey);
 		this.delete(entity);
 	}
 
-	
 	public void deleteAll() {
 		sf.getCurrentSession()
 				.createQuery("DELETE FROM " + getEntityClass().getName())
